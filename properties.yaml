@@ -7,6 +7,7 @@ minlongitude: -80.42
 rms: 0
 output: ../resources/final_output.csv
 timebinsize: 20
-
+loglevel: DEBUG
+logfile: ../log.txt
 #preprod
 #location: URL_TO_PREPROD/requests.csv
