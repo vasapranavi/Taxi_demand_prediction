@@ -1,0 +1,12 @@
+#local
+location: ../resources/requests.csv
+maxlatitude: -11.12
+maxlongitude: -76.44
+minlatitude: -12.92
+minlongitude: -80.42
+rms: 0
+output: ../resources/final_output.csv
+timebinsize: 20
+
+#preprod
+#location: URL_TO_PREPROD/requests.csv
