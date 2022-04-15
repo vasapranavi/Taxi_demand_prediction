@@ -1,8 +1,10 @@
 import pandas as pd
 
+from demand_prediction.preprocessing.fill import fill_missing_time_bins
+from demand_prediction.preprocessing.frequency import get_frequency_of_rides
 from demand_prediction.preprocessing.h3_binning import geo_to_h3
 from demand_prediction.preprocessing.outlier_removal import remove_outliers
-from demand_prediction.preprocessing.time_bin import bin_time
+from demand_prediction.preprocessing.time_bin import bin_time, max_min_time_bin
 from demand_prediction.utils.read_inputs import read_yaml
 
 
@@ -25,3 +27,10 @@ def main():
 
     # Bin data according to time
     time_binned_data = bin_time(h3_binned_data, 'created_at', int(inputs['timebinsize']))
+
+    # Get the frequency of rides
+    frequency_data = get_frequency_of_rides(time_binned_data)
+    min_time_bin, max_time_bin = max_min_time_bin(demand_data, 'created_at', int(inputs['timebinsize']))
+    # Fill the missing time bins with 0
+    filled_data = fill_missing_time_bins(frequency_data['h3_point'].unique(), frequency_data, min_time_bin,
+                                         max_time_bin)
